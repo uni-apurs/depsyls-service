@@ -1,5 +1,7 @@
 package com.apurs.microservices.depsylsservice.model;
 
+import java.time.ZonedDateTime;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,6 +21,12 @@ public class Depsyl {
 	
 	@Column(name = "\"syllabusId\"")
 	private int syllabusId;
+	
+	@Column(name = "\"createdAt\"")
+	private ZonedDateTime createdAt;
+	
+	@Column(name = "\"updatedAt\"")
+	private ZonedDateTime updatedAt;
 
 	public int getId() {
 		return id;
@@ -42,5 +50,21 @@ public class Depsyl {
 
 	public void setSyllabusId(int syllabusId) {
 		this.syllabusId = syllabusId;
+	}
+
+	public ZonedDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(ZonedDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public ZonedDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(ZonedDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 }

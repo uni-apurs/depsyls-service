@@ -1,6 +1,6 @@
 package com.apurs.microservices.depsylsservice.controller;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apurs.microservices.depsylsservice.model.Depsyl;
+import com.apurs.microservices.depsylsservice.dto.DepsylCreateDTO;
+import com.apurs.microservices.depsylsservice.dto.DepsylDTO;
+import com.apurs.microservices.depsylsservice.dto.DepsylUpdateDTO;
 import com.apurs.microservices.depsylsservice.service.DepsylServiceImpl;
 
 @RestController
@@ -25,17 +27,17 @@ public class DepsylRestController {
 	private DepsylServiceImpl depsylService;
 	
 	@GetMapping("")
-	public Collection<Depsyl> getDepsyls() {
+	public List<DepsylDTO> getDepsyls() {
 		return depsylService.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Depsyl getDepsyl(@PathVariable("id") Integer id) {
+	public DepsylDTO getDepsyl(@PathVariable("id") Integer id) {
 		return depsylService.findOne(id);
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<Depsyl> insertDepsyl(@RequestBody Depsyl depsyl) {
+	public ResponseEntity<DepsylDTO> insertDepsyl(@RequestBody DepsylCreateDTO depsyl) throws Exception {
 		if (depsylService.insert(depsyl) != null)
 			return new ResponseEntity<>(HttpStatus.OK);
 		
@@ -43,15 +45,15 @@ public class DepsylRestController {
 	}
 	
 	@PutMapping("")
-	public ResponseEntity<Depsyl> updateDepsyl(@RequestBody Depsyl depsyl) {
-		if (depsylService.update(depsyl))
+	public ResponseEntity<DepsylDTO> updateDepsyl(@RequestBody DepsylUpdateDTO depsyl) throws Exception {
+		if (depsylService.update(depsyl) != null)
 			return new ResponseEntity<>(HttpStatus.OK);
 		
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Depsyl> deleteDepsyl(@PathVariable("id") Integer id) {
+	public ResponseEntity<DepsylDTO> deleteDepsyl(@PathVariable("id") Integer id) {
 		if (depsylService.delete(id))
 			return new ResponseEntity<>(HttpStatus.OK);
 		

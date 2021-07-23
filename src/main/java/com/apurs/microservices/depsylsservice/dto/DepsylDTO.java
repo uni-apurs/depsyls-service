@@ -5,6 +5,10 @@ public class DepsylDTO {
 	private int departmentId;
 	private int syllabusId;
 	
+	public DepsylDTO() {
+		super();
+	}
+
 	public DepsylDTO(int id, int departmentId, int syllabusId) {
 		super();
 		this.id = id;
